@@ -61,17 +61,4 @@ const ClienteModel = sequelize.define(
   },
 );
 
-// Exemplo de uso de sincronização automática (geralmente usado em desenvolvimento)
-async function syncDB() {
-  try {
-    await ClienteModel.sync({ force: true }); // Força a sincronização, cuidado com dados existentes!
-    console.log('Tabela sincronizada com sucesso.');
-  } catch (error) {
-    console.error('Erro ao sincronizar tabela:', error);
-  }
-}
-
-// Chamada para sincronizar a tabela
-syncDB();
-
 export default ClienteModel;
