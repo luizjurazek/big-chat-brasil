@@ -11,8 +11,7 @@ class ClientController {
     // #swagger.description = 'Endpoint to get info of a client'
 
     try {
-      const id = req.params.id;
-
+      const id: number = parseInt(req.params.id);
       const client = await ClientModel.findOne({
         where: {
           id,
@@ -56,30 +55,38 @@ class ClientController {
 
         return res.status(400).json(response);
       } else {
-        const { name, email, phone, cpf, responsible, cnpj, company_name, type_plan } = req.body;
-        let { credits, limit } = req.body;
-
+        const {
+          name,
+          email,
+          phone,
+          cpf,
+          responsible,
+          cnpj,
+          company_name,
+          type_plan,
+        }: { name: string; email: string; phone: string; cpf: string; responsible: string; cnpj: string; company_name: string; type_plan: string } = req.body;
+        let { credits, limit }: { credits: number; limit: number } = req.body;
 
         const verifyIfEmailAlreadyExist = await ClientModel.findOne({
           where: {
-            email
-          }
-        })
+            email,
+          },
+        });
 
-        if(verifyIfEmailAlreadyExist){
+        if (verifyIfEmailAlreadyExist) {
           const response: object = {
             error: true,
-            message: "Email already exist"
-          }
+            message: "Email already exist",
+          };
 
-          return res.status(400).json(response)
+          return res.status(400).json(response);
         }
 
-        // if client has pos-pago plan set the value of credits to 0 
+        // if client has pos-pago plan set the value of credits to 0
         if (type_plan === "pos-pago") {
           credits = 0;
         } else {
-        // else client has pre-pago plan set the value of limit to 0 
+          // else client has pre-pago plan set the value of limit to 0
           limit = 0;
         }
 
@@ -227,7 +234,7 @@ class ClientController {
     // #swagger.tags = ['Client']
     // #swagger.description = 'Endpoint to alter plan of a client'
     try {
-      const resetValue = 0.00
+      const resetValue = 0.0;
 
       const id = req.body;
       const client = await ClientModel.findOne({
@@ -295,7 +302,6 @@ class ClientController {
 
         return res.status(404).json(response);
       }
-
 
       // when client has a pre-pago plan return an error
       if (client.dataValues.type_plan === "pre-pago") {

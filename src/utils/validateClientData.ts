@@ -17,11 +17,11 @@ async function validateClienteData(clienteData: ClienteData): Promise<string[] |
   const errors: string[] = [];
 
   // Verificar campos obrigatórios
-  if (!name) {
-    errors.push("O nome do cliente é obrigatório.");
+  if (!name || typeof name != "string") {
+    errors.push("O nome do cliente é obrigatório e precisa ser uma string.");
   }
-  if (!email) {
-    errors.push("O email do cliente é obrigatório.");
+  if (!email || typeof email != "string") {
+    errors.push("O email do cliente é obrigatório e precisa ser uma string.");
   } else {
     // Validar formato do email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,11 +29,11 @@ async function validateClienteData(clienteData: ClienteData): Promise<string[] |
       errors.push("Formato de email inválido.");
     }
   }
-  if (!phone) {
-    errors.push("O telefone do cliente é obrigatório.");
+  if (!phone || typeof phone != "string") {
+    errors.push("O telefone do cliente é obrigatório e precisa ser uma string.");
   }
-  if (!cpf) {
-    errors.push("O CPF do cliente é obrigatório.");
+  if (!cpf || typeof cpf != "string") {
+    errors.push("O CPF do cliente é obrigatório e precisa ser uma string.");
   } else {
     // Validar formato do CPF
     const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
@@ -41,11 +41,11 @@ async function validateClienteData(clienteData: ClienteData): Promise<string[] |
       errors.push("Formato de CPF inválido. Use o formato xxx.xxx.xxx-xx");
     }
   }
-  if (!responsible) {
-    errors.push("O responsável é obrigatório.");
+  if (!responsible || typeof responsible != "string") {
+    errors.push("O responsável é obrigatório e precisa ser uma string.");
   }
-  if (!cnpj) {
-    errors.push("O CNPJ é obrigatório.");
+  if (!cnpj || typeof cnpj != "string") {
+    errors.push("O CNPJ é obrigatório  e precisa ser uma string.");
   } else {
     // Validar formato do CNPJ
     const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/;
@@ -53,11 +53,19 @@ async function validateClienteData(clienteData: ClienteData): Promise<string[] |
       errors.push("Formato de CNPJ inválido. Use o formato xx.xxx.xxx/xxxx-xx");
     }
   }
-  if (!company_name) {
-    errors.push("O nome da empresa é obrigatório.");
+  if (!company_name || typeof company_name != "string") {
+    errors.push("O nome da empresa é obrigatório e precisa ser uma string.");
   }
   if (!type_plan || !["pre-pago", "pos-pago"].includes(type_plan)) {
     errors.push("O tipo de plano deve ser 'pre-pago' ou 'pos-pago'.");
+  }
+
+  // Verificar tipos de dados
+  if (credits_used !== undefined && typeof credits_used !== 'number') {
+    errors.push("O campo 'credits_used' deve ser um número.");
+  }
+  if (limit !== undefined && typeof limit !== 'number') {
+    errors.push("O campo 'limit' deve ser um número.");
   }
 
   // Return errors if found or null if doesnt

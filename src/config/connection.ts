@@ -15,12 +15,20 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   port: DB_PORT
 });
 
+// Flag to control if syncModels has already been executed
+let isSyncExecuted = false;
+
 const syncModels = async () => {
-  try {
-    await sequelize.sync({ force: false, alter: true });
-    console.log('Models synchronized successfully.');
-  } catch (error) {
-    console.error('Error synchronizing models:', error);
+  if (!isSyncExecuted) {
+    try {
+      await sequelize.sync({ force: false, alter: true });
+      console.log('Models synchronized successfully.');
+      isSyncExecuted = true;  // Set the flag to true after successful execution
+    } catch (error) {
+      console.error('Error synchronizing models:', error);
+    }
+  } else {
+    console.log('syncModels has already been executed.');
   }
 };
 
