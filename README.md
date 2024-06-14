@@ -24,11 +24,7 @@ Faça o download do container no seguinte link:
 
 https://drive.google.com/file/d/1a98EWBdkftEUKAYzfrgcGqgayRyPWEvE/view?usp=sharing
 
-Na pasta do projeto inseira o arquivo postgres-bcb.tar, basta rodar os seguinte comandos para inicializar o container:
-
-`docker load <substituir-pela-localizao-atual>\big-chat-brasil\postgres-bcb.tar`
-
-E logo após inicializar o container:
+Abra o terminal com o arquivo do container na pasta raiz do projeto e basta rodar os seguinte comandos para inicializar o container:
 
 `docker load -i postgres-bcb.tar`
 
