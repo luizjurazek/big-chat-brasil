@@ -45,7 +45,6 @@ class ClientController {
     // #swagger.tags = ['Client']
     // #swagger.description = 'Endpoint to create a client'
     try {
-
       // Verify Client data
       const validateDataError = await validateClienteData(req.body);
 
@@ -59,6 +58,22 @@ class ClientController {
       } else {
         const { name, email, phone, cpf, responsible, cnpj, company_name, type_plan } = req.body;
         let { credits, limit } = req.body;
+
+
+        const verifyIfEmailAlreadyExist = await ClientModel.findOne({
+          where: {
+            email
+          }
+        })
+
+        if(verifyIfEmailAlreadyExist){
+          const response: object = {
+            error: true,
+            message: "Email already exist"
+          }
+
+          return res.status(400).json(response)
+        }
 
         // if client has pos-pago plan set the value of credits to 0 
         if (type_plan === "pos-pago") {

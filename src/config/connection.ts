@@ -15,4 +15,15 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   port: DB_PORT
 });
 
+const syncModels = async () => {
+  try {
+    await sequelize.sync({ force: false, alter: true });
+    console.log('Models synchronized successfully.');
+  } catch (error) {
+    console.error('Error synchronizing models:', error);
+  }
+};
+
+syncModels();
+
 export { sequelize };
