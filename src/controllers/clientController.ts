@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import Client from "../models/clientModel";
 import validateClienteData from "../utils/validateClientData";
-import ClienteModel from "../models/clientModel";
 
 const ClientModel = Client;
 
@@ -23,7 +22,7 @@ class ClientController {
       if (!client) {
         const response: object = {
           error: true,
-          message: "User not found",
+          message: "Client not found",
         };
 
         return res.status(404).json(response);
@@ -31,7 +30,7 @@ class ClientController {
 
       const response: object = {
         error: false,
-        massage: "User found with successfully",
+        massage: "Client found with successfully",
         client,
       };
 
@@ -47,7 +46,7 @@ class ClientController {
     // #swagger.description = 'Endpoint to create a client'
     try {
 
-      // Verify user data
+      // Verify Client data
       const validateDataError = await validateClienteData(req.body);
 
       if (validateDataError !== null) {
@@ -85,7 +84,7 @@ class ClientController {
         if (!newClient) {
           const response: object = {
             error: true,
-            message: "Has an error while create user",
+            message: "Has an error while create Client",
           };
 
           return res.status(400).json(response);
@@ -93,7 +92,7 @@ class ClientController {
 
         const response: object = {
           error: true,
-          message: "User created with successfully",
+          message: "Client created with successfully",
           client: newClient,
         };
         return res.status(201).json(response);
@@ -121,7 +120,7 @@ class ClientController {
       if (!client) {
         const response: object = {
           error: true,
-          message: "User not found",
+          message: "Client not found",
         };
 
         return res.status(404).json(response);
@@ -131,7 +130,7 @@ class ClientController {
       if (client.dataValues.type_plan === "pos-pago") {
         const response: object = {
           error: true,
-          message: "User with plan pos-pago",
+          message: "Client with plan pos-pago",
         };
 
         return res.status(400).json(response);
@@ -172,7 +171,7 @@ class ClientController {
       if (!client) {
         const response: object = {
           error: true,
-          message: "User not found",
+          message: "Client not found",
         };
 
         return res.status(404).json(response);
@@ -223,7 +222,7 @@ class ClientController {
       if (!client) {
         const response: object = {
           error: true,
-          message: "User not found",
+          message: "Client not found",
         };
 
         return res.status(404).json(response);
@@ -237,8 +236,6 @@ class ClientController {
         const new_credit: number = limit - limit_used;
 
         const clientUpdate = await client.update({ type_plan: "pre-pago", credits: new_credit, limit: resetValue, limit_used: resetValue });
-
-        console.log(clientUpdate);
 
         const response: object = {
           error: false,
@@ -278,7 +275,7 @@ class ClientController {
       if (!client) {
         const response: object = {
           error: true,
-          message: "User not found",
+          message: "Client not found",
         };
 
         return res.status(404).json(response);
@@ -289,7 +286,7 @@ class ClientController {
       if (client.dataValues.type_plan === "pre-pago") {
         const response: object = {
           error: true,
-          message: "User with plan pre-pago",
+          message: "Client with plan pre-pago",
         };
 
         return res.status(400).json(response);
