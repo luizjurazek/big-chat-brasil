@@ -3,7 +3,7 @@ const swaggerAutogen = require("swagger-autogen");
 
 const outputFile = "../swagger_output.json";
 
-const endpointFiles = ["./routes/teste.ts"];
+const endpointFiles = ["./routes/clientRouter.ts", "./routes/smsRouter.ts"];
 
 const generateSwagger = async () => {
   await swaggerAutogen(outputFile, endpointFiles);

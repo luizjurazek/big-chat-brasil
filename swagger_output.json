@@ -11,12 +11,237 @@
     "http"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "description": "",
+    "/create-client": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "description": "Endpoint to create a client",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "responsible": {
+                  "example": "any"
+                },
+                "cnpj": {
+                  "example": "any"
+                },
+                "company_name": {
+                  "example": "any"
+                },
+                "type_plan": {
+                  "example": "any"
+                },
+                "credits": {
+                  "example": "any"
+                },
+                "limit": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/get-info-client/{id}": {
+      "get": {
+        "tags": [
+          "Client"
+        ],
+        "description": "Endpoint to get info of a client",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/check-balance/{id}": {
+      "get": {
+        "tags": [
+          "Client"
+        ],
+        "description": "Endpoint to check balance of a client",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/add-credit": {
+      "patch": {
+        "tags": [
+          "Client"
+        ],
+        "description": "to add credit to a client with plan pre-pago",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "amount": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/alter-plan": {
+      "patch": {
+        "tags": [
+          "Client"
+        ],
+        "description": "Endpoint to alter plan of a client",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/alter-limit": {
+      "patch": {
+        "tags": [
+          "Client"
+        ],
+        "description": "Endpoint to alter limit of a client",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "new_limit": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/send-message": {
+      "post": {
+        "tags": [
+          "SMS"
+        ],
+        "description": "Endpoint to send a massage",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "phone": {
+                  "example": "any"
+                },
+                "isWhatsApp": {
+                  "example": "any"
+                },
+                "message": {
+                  "example": "any"
+                },
+                "id_client": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
